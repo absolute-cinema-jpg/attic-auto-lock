@@ -1,7 +1,20 @@
 #!/bin/zsh
 
-attic_location="/Volumes/IS_Nexis/Unity Attic"
-archive_location="/Volumes/IS_Nexis/Unity Attic_Archive"
+# The volume name is machine-specific and lives outside the repo. To set up:
+#   mkdir -p ~/.config/attic-auto-lock
+#   cp config.example ~/.config/attic-auto-lock/config
+# then edit the copy.
+configFile="$HOME/.config/attic-auto-lock/config"
+[[ -r "$configFile" ]] && source "$configFile"
+
+if [[ ! -d "$atticVolume" ]]; then
+  echo "attic-auto-lock.sh: set atticVolume to a mounted volume in $configFile (see config.example)" >&2
+  osascript -e 'display notification "Attic not locked: check the volume in your config" with title "Attic Auto-Lock"'
+  exit 1
+fi
+
+attic_location="$atticVolume/Unity Attic"
+archive_location="$atticVolume/Unity Attic_Archive"
 
 mv $attic_location $archive_location
 cd $archive_location

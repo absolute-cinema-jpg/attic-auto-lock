@@ -1,0 +1,4 @@
+# Copy to ~/.config/attic-auto-lock/config and edit the copy. attic-auto-lock.sh sources it.
+
+# The volume holding the "Unity Attic" folder
+atticVolume="/Volumes/YOUR_VOLUME"
